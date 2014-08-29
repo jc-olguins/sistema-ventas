@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../css/bootstrap.css">
+
+    <link rel="stylesheet" href="../css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../css/style.css">  
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">  
+	<title>Document</title>
+</head>
+<body>	
+	<div class="navigation">
+		<ul class="cont-left">
+			<li style="border-bottom: 5px solid #0080FF;">
+				<a href="">
+					<span class="glyphicon glyphicon-home"></span>		
+					<span class="text">Inicio</span>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<span class="glyphicon glyphicon-user"></span>
+					<span class="text">Adm.Usuarios</span>
+				</a>
+			</li>			
+			<li>
+				<a href="">
+					<span class="glyphicon glyphicon-briefcase"></span>
+					<span class="text">Adm.Funcional</span>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<span class="glyphicon glyphicon-wrench"></span>
+					<span class="text">Adm.Tecnica</span>
+				</a>
+			</li>
+		</ul>
+		<div class="cont-right">
+					<a href="">
+						<span class="glyphicon glyphicon-cog"></span>
+					</a>					
+		</div>
+	</div>
+	<div class="container-fullscr base">
+		<div class="user-info cont-left">
+			<div class="type">				
+				<i class="fa fa-beer" style="font-size:70px;text-align: center;"></i>
+				<span class="text"><br>Super-User</span>
+			</div>
+			<div class="btn-group">
+			  <button type="button" class="btn btn-default active">Super-User</button>
+			  <button type="button" class="btn btn-default">Adm. Funcional</button>
+			  <button type="button" class="btn btn-default">Adm. Tecnico</button>
+			</div>
+			<h3 style="text-align: center;">Alertas <span class="label label-default">4</span></h3>
+			<div class="alert alert-success alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+ 				Bienbenido al Sistema Luis
+			</div>
+			<div class="alert alert-warning alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+ 				Su cuenta no se cerro adecuadamente la ultima vez
+			</div>
+			<div class="alert alert-warning alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+ 				Debe Actualizar su contraseña
+			</div>
+			<div class="alert alert-warning alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+ 				Hay un extraño comportamiento en algunos usuarios
+			</div>
+		</div>
+
+		<div class="bitacora cont-right"></div>
+	</div>
+
+	
+	
+</body>
+</html>
