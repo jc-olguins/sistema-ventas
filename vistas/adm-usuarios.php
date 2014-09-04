@@ -83,8 +83,8 @@
 							echo "<td>".$row['FE_INGRESO']."</td>";
 							echo "<td>".$row['P010_ESTADO_USUARIO']."</td>";
 							echo '<td>
-								<a  id="read.'.$row['CO_USUARIO'].'" class="btn btn-default" href="#'.$row['CO_USUARIO'].'">Leer</a>
-								<a id="update.'.$row['CO_USUARIO'].'" class="btn btn-primary  href="#'.$row['CO_USUARIO'].'">Editar</a>		
+								<a   id="read.'.$row['CO_USUARIO'].'" class="btn btn-default" href="#'.$row['CO_USUARIO'].'">Leer</a>
+								<a id="update.'.$row['CO_USUARIO'].'" class="btn btn-primary"  href="#'.$row['CO_USUARIO'].'">Editar</a>		
 							</td>';
 							echo "</tr>";
 						}
@@ -111,39 +111,51 @@
 		</div>
 		
 	</div>
-	<script>	
-		$("#back").click(function(){
-                $(".mostrar").remove(); 
-                $("#back").remove();
-                alert("volver a inicio");
-    	});
+	<script type="text/javascript" >
 
-		$( ".btn.btn-default" ).click(function() {
-			$( ".content" ).remove();
-			$( "#screen" ).append( '<div class="content"></div>' );
-			var $id= $(this);
-			var nid=$id.attr('id');
-			var cod= nid.split('.');
-			var dato='cod='+cod[1];
-			$.ajax({
-				type:"POST",
-				url:"../controladores/read.php",
-				dataType:"text",
-				data:dato,
-				success:function(response){
-					$(".content").append(response);
-				},
-				error:function(xhr,ajaxOptions,thrownError){
-					alert(thrownError);
-				}
+		
+			$("#screen").on('click','.btn.btn-default',function(){
+				$( ".content" ).remove();
+				$( "#screen" ).append( '<div class="content"></div>' );
+				var $id= $(this);
+				var nid=$id.attr('id');				
+				var cod= nid.split('.');
+				var dato='cod='+cod[1];
+				$.ajax({
+					type:"POST",
+					url:"../controladores/read.php",
+					dataType:"text",
+					data:dato,
+					success:function(response){
+						$(".content").append(response);					
+					},
+					error:function(xhr,ajaxOptions,thrownError){
+						alert(thrownError);
+					}
+
+				});
+			});	
+			$("#screen").on("click","#back", function(){
+
+				 
+                $(".mostrar").remove(); 
+                $("#back").remove();                 
+                var dato='x=1'
+                $.ajax({
+                	type:"POST",
+                	url:"../controladores/table.php",
+                	dataType:"text",
+                	data:dato,
+                	success:function(response){
+                		$(".content").append(response);
+                	},
+                	error:function(xhr,ajaxOptions,thrownError){
+						alert(thrownError);
+					}
+                }) 								
 
 			});
-
-
-		});	
-
-
-
+		
 	</script>
 	
 </body>

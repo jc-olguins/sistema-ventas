@@ -67,13 +67,7 @@
 
 
     echo '</div>';    
-    echo '<span id="back" class="btn btn-default" style="margin-left:13.8%;">Regresar</span>';
-    echo '<script>
-        $("#back").click(function(){
-                $(".mostrar").remove(); 
-                $("#back").remove();
-                alert("volver a inicio");
-    });</script>';
-    
+    echo '<span id="back" class="btn btn-primary" style="margin-left:13.8%;">Regresar</span>';
+   
    
 ?>
