@@ -1,5 +1,5 @@
 <?php
-    require 'database.php';
+    require '../database.php';
     $id = null;
     if ( !empty($_POST['cod'])) {
         $id = $_POST['cod'];       

@@ -1,5 +1,5 @@
 <?php 
-	 require 'database.php';
+	 require '../database.php';
  
     $id = null;
     
@@ -15,7 +15,7 @@
             $mobile = $_POST['tel']; 
             $fei = $_POST['fei'];           
             $stu = $_POST['stu'];
-            
+            echo 'entro';
 
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

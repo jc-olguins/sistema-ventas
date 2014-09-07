@@ -72,7 +72,7 @@
 				</thead>
 				<tbody>
 					<?php 
-						include ("../controladores/database.php");	
+						include ("database.php");	
 						$pdo=Database::connect();
 						$sql='SELECT * FROM M050_USUARIO ORDER BY CO_USUARIO';
 						foreach ($pdo->query($sql) as $row) {
@@ -122,7 +122,7 @@
 				$( "#screen" ).append( '<div class="content"></div>' );
 				$.ajax({
 					type:"POST",
-					url:"../controladores/create.php",
+					url:"usuarios/create.php",
 					dataType:"text",
 					data:'',
 					success:function(response){
@@ -148,7 +148,7 @@
 			$('#insert').remove();
 			$.ajax({
 					type:"POST",
-					url:"../controladores/create.php",
+					url:"usuarios/create.php",
 					dataType:"text",
 					data:{tipo:$(this).val()},
 					success:function(response){
@@ -173,7 +173,7 @@
 
 				$.ajax({
 					type:"POST",
-					url:"../controladores/create.php",
+					url:"usuarios/create.php",
 					dataType:"text",
 					data:{cli:cliente,alias:$('#alias').val(),nombre:$('#nombre').val(),clave:$('#clave').val(),ced:$('#ced').val(),tel:$('#tel').val(),fei:$('#fei').val(),stu:stu,rif:$('#rif').val(),correo:$('#correo').val(),dir:$('#dir').val(),bank:$('#bank').val(),sueldo:$('#sueldo').val(),feco:$('#feco').val(),cargo:$('#cargo').val()},
 					success:function(response){
@@ -202,7 +202,7 @@
 				var dato='cod='+cod[1];
 				$.ajax({
 					type:"POST",
-					url:"../controladores/read.php",
+					url:"usuarios/read.php",
 					dataType:"text",
 					data:dato,
 					success:function(response){
@@ -215,7 +215,7 @@
 				});
 			});	
 			$("#screen").on("click","#back", function(){
-				window.location='adm-usuarios.php';
+				window.location='usuario.php';
 				 
 			});
 
@@ -228,7 +228,7 @@
 				var dato='cod='+cod[1];				 
                 $.ajax({
                 	type:"POST",
-                	url:"../controladores/update.php",
+                	url:"usuarios/update.php",
                 	dataType:"text",
                 	data:dato,
                 	success:function(response){
@@ -242,9 +242,12 @@
 			});
 
 			$("#screen").on('click','#update',function(){
-					alert($('#stu').val());
-				$.post('../controladores/update.php',
-					{
+					
+				$.ajax({
+                	type:"POST",
+                	url:"usuarios/update.php",
+                	dataType:"text",
+                	data:{
 					valid:1,
 					cod: $('#cod').val(),	
 					alias: $('#alias').val(),
@@ -254,12 +257,17 @@
 					tel: $('#tel').val(),
 					fei: $('#fei').val(),
 					stu: $('#stu').val()
-					}, function(data){
-						$alert(data);
 					},
-					'text');
+                	success:function(response){
 
-				window.location='adm-usuarios.php';
+                		$(".content").append(response);
+                	},
+                	error:function(xhr,ajaxOptions,thrownError){
+						alert(thrownError);
+					}
+                });				
+
+				window.location='usuario.php';
 			});
 
 			$("#screen").on('click','.el',function(){
@@ -271,7 +279,7 @@
 				var dato='cod='+cod[1];									
 				$.ajax({
 					type:"POST",
-					url:"../controladores/delete.php",
+					url:"usuarios/delete.php",
 					dataType:"text",
 					data:dato,
 					success:function(response){
@@ -287,13 +295,13 @@
 			$("#screen").on('click','#del',function(){									
 				$.ajax({
 				type: "POST",
-				url: "../controladores/delete.php",
+				url: "usuarios/delete.php",
 				data: {codu: $('#cod').val(), valid:1},
 				dataType: "text",
 				success:function(response){
 					if(response==''){
 
-						window.location='adm-usuarios.php';
+						window.location='usuario.php';
 					}else{
 						alert(response);
 					}					
