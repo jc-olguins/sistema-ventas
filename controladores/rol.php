@@ -7,17 +7,17 @@
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js" ></script>
     <link   href="../css/style.css" rel="stylesheet">
     <script src="../js/bootstrap.min.js"></script>
-    <title>Crud Modelos</title>
+    <title>Crud Roles</title>
+
 </head>
  
 <body>
-  <div class="navigation">
+<div class="navigation">
     <ul class="cont-left">
       <?php 
         include('../modelos/menu.php');
 
        ?>
-          
     </ul>
     <div class="cont-right">
           <a href="../modelos/logout.php" style="text-decoration:none;">            
@@ -26,57 +26,51 @@
           </a>          
     </div>
   </div>
-<div class="container-fullscr base">
+  <div class="container-fullscr base">
     <div class="content">
 
-        <a href="#" class="insertar" style="font-size:45px; text-decoration: none;">        
+<a href="#" class="insertar" style="font-size:45px; text-decoration: none;">        
             <i class="fa fa-plus-circle"></i>
             <span  class="text" style="font-size:22px; vertical-align: 8px">
-                Agregar Modelo
+                Agregar Rol
             </span>
         </a>
-
-        <table class="table table-bordered" style="margin:auto auto; width:80%; ">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Marca</th>
-                    <th>Año</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-              <?php
-              include 'database.php';
-              $pdo = Database::connect();
-              $sql = 'SELECT P120_MODELO.NB_NOMBRE as NOMBRE, P110_MARCA.NB_NOMBRE as NOMBRE_MARCA, 
-                             P120_MODELO.CO_ID as CO_ID, P120_MODELO.FE_FECHA as FECHA 
-                      FROM P120_MODELO, P110_MARCA 
-                      WHERE P120_MODELO.P110_MARCA_CO_ID=P110_MARCA.CO_ID 
-                      ORDER BY P120_MODELO.NB_NOMBRE ASC';
-              foreach ($pdo->query($sql) as $row) {
-                      echo "<tr>";
-                      echo "<td>".$row['NOMBRE']."</td>";
-                      echo "<td>".$row['NOMBRE_MARCA']."</td>";
-                      echo "<td>".$row['FECHA']."</td>";
-                      echo "<td>";
-                        echo '<a class="btn btn-default ver" id='.$row['CO_ID'].'">Ver</a>';
-                        echo " ";
-                        echo '<a class="btn btn-primary editar" id='.$row['CO_ID'].'">Editar</a>';
-                        echo " ";
-                        echo '<a class="btn btn-danger eliminar" id='.$row['CO_ID'].'">Eliminar</a>';
-                      echo '</td>';
-                      echo "</tr>";
-              }
-              Database::disconnect();
-              ?>
-            </tbody>
+<table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Codigo</th>
+                      <th>Nombre Rol</th>
+                      <th>Status</th>
+                      <th>Accion</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                   include 'database.php';
+                   $pdo = Database::connect();
+                   $sql = 'SELECT * FROM P020_ROL';
+                   foreach ($pdo->query($sql) as $row) {
+                            echo '<tr>';
+                            echo '<td>'. $row['CO_ROL'] . '</td>';
+                            echo '<td>'. $row['NB_ROL'] . '</td>';
+                            echo '<td>'. $row['ST_ROL'] . '</td>';
+                            echo '<td width=250>';
+                                echo '<a class="btn btn-default ver" href="#" id="'.$row['CO_ROL'].'">Leer</a>';
+                                echo ' ';
+                                echo '<a class="btn btn-primary editar" href="#" id="'.$row['CO_ROL'].'">Actualizar</a>';
+                                echo ' ';
+                                echo '<a class="btn btn-danger eliminar" href="#" id="'.$row['CO_ROL'].'">Eliminar</a>';
+                                echo '</td>';
+                            echo '</tr>';
+                   }
+                   Database::disconnect();
+                  ?>
+                  </tbody>
             </table>
-     </div> <!-- /content -->
+            </div> <!-- /content -->
   </div> <!-- /container-fullscr base -->
 </body>
- <script type="text/javascript">
+  <script type="text/javascript">
       $('body').on("click",'.ver',function(){
           $('.content').remove();
           $('.base').append('<div class="content"></div>');
@@ -84,7 +78,7 @@
           var dato=$aux.attr('id');
           $.ajax({
             type:'POST',
-            url:'modelo/ver.php',  
+            url:'rol/read.php',  
             data:{ dato:dato },
             success:function(respuesta){
               $('.content').append(respuesta);
@@ -93,7 +87,7 @@
       });
 
       $('body').on("click",".volver",function(){
-        window.location="modelo.php";
+        window.location="rol.php";
       });
 
       $('body').on("click",'.insertar',function(){
@@ -101,7 +95,7 @@
           $('.base').append('<div class="content"></div>');
           $.ajax({
             type:'POST',
-            url:'modelo/insertar.php',  
+            url:'rol/create.php',  
             data:{ },
             success:function(respuesta){
               $('.content').append(respuesta);
@@ -110,17 +104,17 @@
       });
 
       $('body').on("click",".insertar_insertar",function(){
-            if( $('#nombre').val()==0 || $('#fecha').val()==0 ){
-                alert('Debe ingresar todos los campos');
-            }else if( isNaN($('#fecha').val()) || $('#fecha').val()<1990 || $('#fecha').val()>2015 ){
-                alert('Debe ingresar un año valido');
+        var parametros =$('form').serialize();
+            if( $('#name').val()==0 ){
+                alert('Debe ingresar el nombre');
             }else{
-                $.ajax({
+              $.ajax({
                 type:'POST',
-                url:'modelo/insertar.php',
-                data:{ nombre:$('#nombre').val() , fecha:$('#fecha').val() , marca:$('#marca').val() },
+                url:'rol/create.php',
+                data: parametros,
+                //data:{ name:$('#name').val(), email:$('#email').val(),selector:$('#selector').val() },
                 success:function(respuesta){
-                  window.location="modelo.php";
+                  window.location="rol.php";
                 }
               });
             }
@@ -133,7 +127,7 @@
           var dato=$aux.attr('id');
           $.ajax({
             type:'POST',
-            url:'modelo/borrar.php',  
+            url:'rol/delete.php',  
             data:{ dato:dato },
             success:function(respuesta){
               $('.content').append(respuesta);
@@ -141,13 +135,13 @@
           });
       });
 
-     $('body').on("click",".borrar_borrar",function(){
+      $('body').on("click",".borrar_borrar",function(){
           $.ajax({
             type:'POST',
-            url:'modelo/borrar.php',  
+            url:'rol/delete.php',  
             data:{ dato:$('#dato').val() , bd:1 },
             success:function(respuesta){
-              window.location="modelo.php";
+              window.location="rol.php";
             }
           });
       });
@@ -159,30 +153,30 @@
           var dato=$aux.attr('id');
           $.ajax({
             type:'POST',
-            url:'modelo/actualizar.php',  
+            url:'rol/update.php',  
             data:{ dato:dato },
             success:function(respuesta){
               $('.content').append(respuesta);
             }
           });
       });
-
       $('body').on("click",".editar_editar",function(){
-            if( $('#nombre').val()==0 || $('#fecha').val()==0 ){
-                alert('Debe ingresar todos los campos');
-            }else if( isNaN($('#fecha').val()) || $('#fecha').val()<1990 || $('#fecha').val()>2015 ){
-                alert('Debe ingresar un año valido');
+        var parametro = $('form').serialize();
+            if( $('#email').val()==0 ){
+                alert('Debe ingresar el nombre');
             }else{
               $.ajax({
                 type:'POST',
-                url:'modelo/actualizar.php',
-                data:{ nombre:$('#nombre').val() , fecha:$('#fecha').val() , marca:$('#marca').val(), dato:$('#dato').val() },
+                url:'rol/update.php',
+                //data: parametro,
+                data:{ name:$('#name').val(), email:$('#email').val(),selector:$('#selector').val() },
                 success:function(respuesta){
-                  window.location="modelo.php";
+                  window.location="rol.php";
                 }
               });
             }
       });
+
 
   </script>
 </html>

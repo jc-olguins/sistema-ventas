@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-	 	
+
 	require('../controladores/database.php');
 	$nickname=$_POST['lg'];
 	$pass=$_POST['pass'];
@@ -23,6 +23,13 @@
 	    	if($data['CO_ROL']=='SUPUS' || $data['CO_ROL']=='ADMTE' || $data['CO_ROL']=='ADMFU'){	  
 	    			
 	    		$_SESSION['NICKNAME']=$nickname;
+	    		$_SESSION['CO_USUARIO']=$id;
+	    		if($data['CO_ROL']=='SUPUS')
+	    			$_SESSION['nameRol']='Super-Usuario';
+	    		else if($data['CO_ROL']=='ADMTE')
+	    			$_SESSION['nameRol']='Admin-Tecnico';
+	    		else
+	    			$_SESSION['nameRol']='Admin-Funcional';
 	    		$adm=true;
 	    	}
 	    
@@ -83,7 +90,7 @@
 
 	    
 		
-	   header('location:../controladores/usuario.php');
+	   header('location:../controladores/home.php');
 	}
 
 	function getUser($nickname ,$pass){

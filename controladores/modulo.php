@@ -19,10 +19,11 @@
 
        ?>
     </ul>
-    <div class="cont-right">
-        <a href="">
-          <span class="glyphicon glyphicon-cog"></span>
-        </a>          
+      <div class="cont-right">
+          <a href="../modelos/logout.php" style="text-decoration:none;">            
+            <span class="text">Cerrar Sesión</span>
+            <span class="glyphicon glyphicon-log-out"></span>
+          </a>          
     </div>
   </div>
     <div id="screen" class="container-fullscr base">
