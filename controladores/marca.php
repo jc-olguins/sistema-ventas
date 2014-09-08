@@ -13,36 +13,10 @@
 <body>  
   <div class="navigation">
     <ul class="cont-left">
-      <li>
-        <a href="">
-          <span class="glyphicon glyphicon-home"></span>    
-          <span class="text">Inicio</span>
-        </a>
-      </li>
-      <li>
-        <a href="">
-          <span class="glyphicon glyphicon-user"></span>
-          <span class="text">Adm Usuarios</span>
-        </a>
-      </li>     
-      <li class="active">
-        <a href="marca.php">
-          <span class="glyphicon glyphicon-briefcase"></span>
-          <span class="text">Adm Marca</span>
-        </a>
-      </li>
-      <li>
-        <a href="modelo.php">
-          <span class="glyphicon glyphicon-wrench"></span>
-          <span class="text">Adm Modelo</span>
-        </a>
-      </li>
-      <li>
-        <a href="modulo.php">
-          <span class="glyphicon glyphicon-wrench"></span>
-          <span class="text">Adm Modulo</span>
-        </a>
-      </li>
+        <?php 
+        include('../modelos/menu.php');
+
+       ?>
     </ul>
     <div class="cont-right">
         <a href="">

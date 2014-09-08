@@ -13,34 +13,15 @@
 <body>
 	<div class="navigation">
 		<ul class="cont-left">
-			<li >
-				<a href="">
-					<span class="glyphicon glyphicon-home"></span>		
-					<span class="text">Inicio</span>
-				</a>
-			</li>
-			<li class="active">
-				<a href="usuario.php">
-					<span class="glyphicon glyphicon-user"></span>
-					<span class="text">Adm.Usuarios</span>
-				</a>
-			</li>			
-			<li>
-				<a href="modelo.php">
-					<span class="glyphicon glyphicon-briefcase"></span>
-					<span class="text">Adm.Funcional</span>
-				</a>
-			</li>
-			<li>
-				<a href="modulo.php">
-					<span class="glyphicon glyphicon-wrench"></span>
-					<span class="text">Adm.Tecnica</span>
-				</a>
-			</li>
+			<?php 
+				include('../modelos/menu.php');
+
+			 ?>
 		</ul>
 		<div class="cont-right">
-					<a href="">
-						<span class="glyphicon glyphicon-cog"></span>
+					<a href="../modelos/logout.php" style="text-decoration:none;">						
+						<span class="text">Cerrar Sesión</span>
+						<span class="glyphicon glyphicon-log-out"></span>
 					</a>					
 		</div>
 	</div>
@@ -84,11 +65,20 @@
 							echo "<td>".$row['NU_CEDULA']."</td>";							
 							echo "<td>".$row['FE_INGRESO']."</td>";
 							echo "<td>".$row['P010_ESTADO_USUARIO']."</td>";
-							echo '<td>
-								<a   id="read.'.$row['CO_USUARIO'].'" class="btn btn-default lr" href="#'.$row['CO_USUARIO'].'">Ver</a>
-								<a id="update.'.$row['CO_USUARIO'].'" class="btn btn-primary at"  href="#'.$row['CO_USUARIO'].'">Editar</a>
-								<a id="del.'.$row['CO_USUARIO'].'" class="btn btn-danger el"  href="#'.$row['CO_USUARIO'].'">Eliminar</a>		
-							</td>';
+							echo '<td>';
+								if($_SESSION['IU']==true)
+									echo '<a   id="read.'.$row['CO_USUARIO'].'" class="btn btn-default lr" href="#'.$row['CO_USUARIO'].'">Ver</a> ';
+								else
+									echo '<a  disabled="disabled" id="read.'.$row['CO_USUARIO'].'" class="btn btn-default lr" href="#'.$row['CO_USUARIO'].'">Ver</a> ';
+								if($_SESSION['MU']==true)	
+									echo '<a id="update.'.$row['CO_USUARIO'].'" class="btn btn-primary at"  href="#'.$row['CO_USUARIO'].'">Editar</a> ';
+								else
+									echo '<a disabled="disabled" id="update.'.$row['CO_USUARIO'].'" class="btn btn-primary at"  href="#'.$row['CO_USUARIO'].'">Editar</a> ';
+								if($_SESSION['EU']==true)
+									echo '<a id="del.'.$row['CO_USUARIO'].'" class="btn btn-danger el"  href="#'.$row['CO_USUARIO'].'">Eliminar</a> ';
+								else
+									echo '<a disabled="disabled" id="del.'.$row['CO_USUARIO'].'" class="btn btn-danger el"  href="#'.$row['CO_USUARIO'].'">Eliminar</a> ';
+							echo '</td>';
 							echo "</tr>";
 						}
 						Database::disconnect();
@@ -97,18 +87,7 @@
 				</tbody>				
 			</table>
 
-			<div class="con">
-
-				<ul class="pagination" style="width:50%;">
-						  <li><a href="#">&laquo;</a></li>
-						  <li><a href="#">1</a></li>
-						  <li><a href="#">2</a></li>
-						  <li><a href="#">3</a></li>
-						  <li><a href="#">4</a></li>
-						  <li><a href="#">5</a></li>
-						  <li><a href="#">&raquo;</a></li>
-				</ul>
-			</div>
+			
 
 	</div>
 		</div>

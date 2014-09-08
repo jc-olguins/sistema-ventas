@@ -1,12 +1,14 @@
 <?php 
+	session_start();
+	 	
 	require('../controladores/database.php');
 	$nickname=$_POST['lg'];
 	$pass=$_POST['pass'];
 
 	$id=getUser($nickname,$pass);
-	getprivileges($id);
+	getprivileges($id,$nickname);
 
-	function getprivileges($id){
+	function getprivileges($id,$nickname){
 		$pdo = Database::connect();
 	    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	    $sql = "SELECT * FROM T070_ROL_USUARIO where CO_USUARIO =? and ST_ROL_USUARIO=? ";
@@ -18,9 +20,9 @@
 	    
 	    // Se obtiene el ROL DE USUARIO
 	     
-	    	if($data['CO_ROL']=='SUPUS' || $data['CO_ROL']=='ADMTE' || $data['CO_ROL']=='ADMFU'){	   
-	    		session_start(); 		
-	    		
+	    	if($data['CO_ROL']=='SUPUS' || $data['CO_ROL']=='ADMTE' || $data['CO_ROL']=='ADMFU'){	  
+	    			
+	    		$_SESSION['NICKNAME']=$nickname;
 	    		$adm=true;
 	    	}
 	    
@@ -79,6 +81,9 @@
 	    	
 	    }
 
+	    
+		
+	   header('location:../controladores/usuario.php');
 	}
 
 	function getUser($nickname ,$pass){
