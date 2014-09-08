@@ -20,19 +20,19 @@
 				</a>
 			</li>
 			<li class="active">
-				<a href="">
+				<a href="usuario.php">
 					<span class="glyphicon glyphicon-user"></span>
 					<span class="text">Adm.Usuarios</span>
 				</a>
 			</li>			
 			<li>
-				<a href="">
+				<a href="modelo.php">
 					<span class="glyphicon glyphicon-briefcase"></span>
 					<span class="text">Adm.Funcional</span>
 				</a>
 			</li>
 			<li>
-				<a href="">
+				<a href="modulo.php">
 					<span class="glyphicon glyphicon-wrench"></span>
 					<span class="text">Adm.Tecnica</span>
 				</a>
