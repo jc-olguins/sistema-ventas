@@ -1,7 +1,7 @@
-sistema-ventas
+#Sistema-ventas(SETIN)
 ==============
 
-Proyecto de Sistemas de Informacion I
+#SETIN
 ==================================================
-Pagina del Sistema de Ventas...Fase de Diseño de Interfaces
--Requisito Bootstrap
+Aplicacion Web de Venta de Maquinaria permite administrar toda la base de datos
+de la empresa mediante crud con una interfaz amigable
