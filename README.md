@@ -1,4 +1,4 @@
-#Sistema-ventas(SETIN)
+#Sistema-Ventas
 
 #SETIN
 ------------------------------------------------------------
