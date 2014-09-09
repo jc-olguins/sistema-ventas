@@ -1,8 +1,10 @@
 <?php
     require '../database.php';
-    if ( !empty($_POST['dato']))
+$id=null;
+if(!empty($_POST['dato']))
         $id=$_POST['dato'];
-    if ( !empty($_POST['email'])) {
+        
+    if ( !empty($_POST)&&$id==null) {
         // keep track validation errors
         $nameError = null;
         $emailError = null;
@@ -30,10 +32,10 @@
             $q->execute(array($email,$mobile,$id));
             Database::disconnect();
 
-           /* //Borrar Rol Modulo
+            //Borrar Rol Modulo
             $pdo = Database::connect();
             $i=0;
-            $sql = 'SELECT * FROM T060_ROL_MODULO where CO_ROL="'.$name.'"';
+            $sql = 'SELECT * FROM T060_ROL_MODULO where CO_ROL="'.$id.'"';
             foreach ($pdo->query($sql) as $row) {
                    if(empty($_POST[$row['CO_MODULO']])){ 
                     $e[$i]=$row['CO_MODULO'];
@@ -51,7 +53,7 @@
             for($j=0;$j<$i;$j++){
                    $sql = "DELETE T060_ROL_MODULO WHERE CO_ROL='?' AND CO_MODULO='?'";
                     $q = $pdo->prepare($sql);
-                    $q->execute(array($name,$e[$j]));}
+                    $q->execute(array($id,$e[$j]));}
             Database::disconnect();
             //Rol Por Modulo
             $pdo = Database::connect();
@@ -65,6 +67,7 @@
                     
             }                  }
             Database::disconnect();
+
             $pdo = Database::connect();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             for($j=0;$j<$i;$j++){
@@ -72,7 +75,7 @@
                     $q = $pdo->prepare($sql);
                     $q->execute(array($id,$e[$j]));}
                    
-            Database::disconnect();*/
+            Database::disconnect();
         }
     } else {
         $pdo = Database::connect();
@@ -101,14 +104,14 @@
                         <h3>Modificar Rol</h3>
                     </div>
              
-                    <form class="form-horizontal" id='formu1' name='formu1'  method="post">
+                    <form class="form-horizontal" id='form' name='form'  method="post">
                         <table class="table table-striped table-bordered">
                 <tr>
                     <td>
                         <div class="control-group<?php echo !empty($nameError)?'error':'';?>">
                         <label class="control-label" >Codigo Rol</label>
                         <div class="controls">
-                            <input name="name" id='name' disabled="disabled" type="text"  placeholder="Codigo Rol" value="<?php echo !empty($name)?$name:'';?>">
+                            <input name="name" id='name' class='hidden' type="text"  placeholder="Codigo Rol" value="<?php echo !empty($id)?$id:'';?>"/>
                             <?php if (!empty($nameError)): ?>
                                 <span class="help-inline"><?php echo $nameError;?></span>
                             <?php endif; ?>
@@ -118,7 +121,7 @@
                       <div class="control-group <?php echo !empty($emailError)?'error':'';?>">
                         <label class="control-label">Nombre de Rol</label>
                         <div class="controls">
-                            <input name="email" id="email" type="text" placeholder="Nombre de Rol" value="<?php echo !empty($email)?$email:'';?>">
+                            <input name="email" id="email" type="text" placeholder="Nombre de Rol" value="<?php echo !empty($email)?$email:'';?> "/>
                             <?php if (!empty($emailError)): ?>
                                 <span class="help-inline"><?php echo $emailError;?></span>
                             <?php endif;?>
@@ -146,7 +149,7 @@
                    $sql = 'SELECT * FROM M040_MODULO where ST_MODULO="A"';
                    foreach ($pdo->query($sql) as $row) {
                     echo '<tr>';
-                            echo '<td>'. $row['NB_MODULO'] .' <td><input type="checkbox" id="'.$row['CO_MODULO'].'" value="'.$row['CO_MODULO'].'"';
+                            echo '<td>'. $row['NB_MODULO'] .' <td><input type="checkbox" name="'.$row['CO_MODULO'].'" value="'.$row['CO_MODULO'].'"';
                             if(isset($e[$row['CO_MODULO']]))
                             if($e[$row['CO_MODULO']]==$row['CO_MODULO'])
                                 echo 'checked="checked"';
@@ -155,7 +158,6 @@
                    }
                    Database::disconnect();
                   ?>
-                  <input hidden="hidden" type="text" disabled="disabled" id="dato" value="<?php echo $id; ?>">
                         </table>
                     </td>
                     </tr>

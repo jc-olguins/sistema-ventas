@@ -64,35 +64,34 @@
     }
 ?>
      
-                <div class="span10 offset1">
-                    <div class="row">
-                        <h3>Crear Rol</h3>
-                    </div>
-                    <form class="form-horizontal" id='formu' name='formu'  method="post">
+        
+                   
+          <form class="mostrar" id='formu' name='formu'  method="post">
             <table class="table table-striped table-bordered">
+            <h2>Crear Rol</h2>
                 <tr>
                     <td>
                     
-                      <div class="control-group<?php echo !empty($nameError)?'error':'';?>">
-                        <label class="control-label" >Codigo Rol</label>
-                        <div class="controls">
-                            <input name="name" id='name' type="text"  placeholder="Codigo Rol" value="<?php echo !empty($name)?$name:'';?>">
+                      <div class="input-group <?php echo !empty($nameError)?'error':'';?>">
+                        <h4 >Codigo Rol</h4>
+                        
+                            <input name="name" id='name' type="text" class="form-control" placeholder="Codigo Rol" value="<?php echo !empty($name)?$name:'';?>">
                             <?php if (!empty($nameError)): ?>
                                 <span class="help-inline"><?php echo $nameError;?></span>
                             <?php endif; ?>
-                        </div>
+                        
                       </div>
-                      <div class="control-group <?php echo !empty($emailError)?'error':'';?>">
-                        <label class="control-label">Nombre Rol</label>
-                        <div class="controls">
-                            <input name="email" id='email' type="text" placeholder="Nombre Rol" value="<?php echo !empty($email)?$email:'';?>">
+                      <div class="input-group <?php echo !empty($emailError)?'error':'';?>">
+                        <h4>Nombre Rol</h4>
+                        
+                            <input name="email" id='email' type="text" class="form-control" placeholder="Nombre Rol" value="<?php echo !empty($email)?$email:'';?>">
                             <?php if (!empty($emailError)): ?>
                                 <span class="help-inline"><?php echo $emailError;?></span>
                             <?php endif;?>
-                        </div>
+                        
                       </div>
-                      <div class="control-group <?php echo !empty($mobileError)?'error':'';?>">
-                        <label class="control-label">Status de Rol</label>  
+                      <div class="input-group <?php echo !empty($mobileError)?'error':'';?>">
+                        <h4>Status de Rol</h4>  
                       <div>
                         <select id='selector' name='selector' class="selectpicker">
                             <option  value='A'>Activo</option>
@@ -100,11 +99,10 @@
                             </select>
                        </div>
                       </div>
-<!--<?php echo $_POST['selector']; ?>-->
-                      <div class="form-actions">
+                      <div class="form-actions" style="margin:5px 5px;">
                           <span class="btn btn-success insertar_insertar" style="margin-left:13.8%;">Insertar</span>
                           <span class="btn btn-primary volver" style="margin-left:2%;">Regresar</span>
-                        </div>
+                      </div>
                     
                     </td>
                     <td>
@@ -125,4 +123,4 @@
                     </tr>
                  </table>
                  </form>
-                </div>
+                

@@ -19,6 +19,7 @@
 			 ?>
 		</ul>
 		<div class="cont-right">
+
 					<a href="../modelos/logout.php" style="text-decoration:none;">						
 						<span class="text">Cerrar Sesión</span>
 						<span class="glyphicon glyphicon-log-out"></span>
@@ -28,12 +29,18 @@
 
 	<div id="screen" class="container-fullscr base">
 		<div class="content">
-			<a   id="create" href="#" style="font-size:45px;text-decoration: none;">				
-						<i class="fa fa-plus-circle"></i>
-						<span  class="text" style="font-size:22px;vertical-align: 8px;">
+		<?php  
+				if($_SESSION['IU']==true){
+					ECHO '<a   id="create" href="#" style="font-size:45px;text-decoration: none;">';				
+					ECHO '	<i class="fa fa-plus-circle"></i>';
+					ECHO '	<span  class="text" style="font-size:22px;vertical-align: 8px;">
 						Agregar Usuario
-						</span>
-			</a>
+						</span>';
+					ECHO '</span>	';
+					ECHO '</a>	';
+
+				}
+			?> 			
 
 			<table class="table table-bordered" style="margin-bottom:0px;">
 
@@ -148,22 +155,31 @@
 				var cliente=$('#tipo').val();
 				
 				
-  				var stu=$('#stu').val();			
+  				var stu=$('#stu').val();
 
-				$.ajax({
-					type:"POST",
-					url:"usuarios/create.php",
-					dataType:"text",
-					data:{cli:cliente,alias:$('#alias').val(),nombre:$('#nombre').val(),clave:$('#clave').val(),ced:$('#ced').val(),tel:$('#tel').val(),fei:$('#fei').val(),stu:stu,rif:$('#rif').val(),correo:$('#correo').val(),dir:$('#dir').val(),bank:$('#bank').val(),sueldo:$('#sueldo').val(),feco:$('#feco').val(),cargo:$('#cargo').val()},
-					success:function(response){
-						
-						$(".content").append(response);					
-					},
-					error:function(xhr,ajaxOptions,thrownError){
-						alert(thrownError);
-					}
+  				if($('#alias').val()=='' || $('#ced').val()=='' || $('#tel').val()=='' || $('#clave').val()==''){
+  					alert('Los campos Cedula,Alias,Telefono y Clave no pueden estar vacios');
+  				}else{		
+  				
 
-				});
+					$.ajax({
+						type:"POST",
+						url:"usuarios/create.php",
+						dataType:"text",
+						data:{cli:cliente,alias:$('#alias').val(),nombre:$('#nombre').val(),clave:$('#clave').val(),ced:$('#ced').val(),tel:$('#tel').val(),fei:$('#fei').val(),stu:stu,rif:$('#rif').val(),correo:$('#correo').val(),dir:$('#dir').val(),bank:$('#bank').val(),sueldo:$('#sueldo').val(),feco:$('#feco').val(),cargo:$('#cargo').val()},
+						success:function(response){
+							
+							$(".content").append(response);
+							window.location='usuario.php';					
+						},
+						error:function(xhr,ajaxOptions,thrownError){
+							alert(thrownError);
+						}
+
+					});
+					
+				}
+
 			});
 
 

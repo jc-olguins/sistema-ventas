@@ -21,7 +21,7 @@
         </header>
 
         <div class="container-fullscr init-imgs">
-           <div class="container-Halftop">
+           <div class="container-Halftop" style="height:180px;">
                 <form action="modelos/validuser.php" method="post">
                     <div class="user-icon"> 
                         <span class="glyphicon glyphicon-user" style:"font-weight: 20px;"></span>
@@ -34,8 +34,8 @@
                     <span class="input-group-addon  glyphicon glyphicon-lock"></span>
                     <input id="pass" name="pass" type="password" class="form-control" placeholder="Contraseña">
                 </div>
-                    <button style="margin-top:20px;margin-left:auto;" type="submmit" class="btn btn-success init" style="width:100%" > Acceder</button> 
-                    <p id="init" style="margin-top:20px;margin-left:auto; margin-right:auto;"><a href="#" class="btn btn-primary" style="width:100%" >Registrar</a></p>
+                    <button style="margin-top:20px;margin-left:auto;width:100%;" type="submmit" class="btn btn-success init" style="width:100%" > Acceder</button> 
+                    
 
                     
                 </form>

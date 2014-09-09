@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="jumbotron">
-  <h1><span class="glyphicon glyphicon-exclamation-sign"></span> Su cuenta contraseña no es correcta</h1>
+  <h1><span class="glyphicon glyphicon-exclamation-sign"></span> Su  contraseña no es correcta</h1>
   
   <p><a class="btn btn-primary btn-lg" role="button" href="../index.php">Volver</a></p>
 </div>

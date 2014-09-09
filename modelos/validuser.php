@@ -4,7 +4,7 @@
 	require('../controladores/database.php');
 	$nickname=$_POST['lg'];
 	$pass=$_POST['pass'];
-
+	$errorpass=false;
 	$id=getUser($nickname,$pass);
 	getprivileges($id,$nickname);
 
@@ -24,14 +24,18 @@
 	    			
 	    		$_SESSION['NICKNAME']=$nickname;
 	    		$_SESSION['CO_USUARIO']=$id;
+
 	    		if($data['CO_ROL']=='SUPUS')
 	    			$_SESSION['nameRol']='Super-Usuario';
 	    		else if($data['CO_ROL']=='ADMTE')
 	    			$_SESSION['nameRol']='Admin-Tecnico';
 	    		else
 	    			$_SESSION['nameRol']='Admin-Funcional';
+	    		
 	    		$adm=true;
 	    	}
+
+
 	    
 	    if($adm){
 	    	$_SESSION['ROL']=$data['CO_ROL'];
@@ -39,7 +43,9 @@
 	    	echo "Ud es un administrador";
 
 
-	    }else{
+	    }
+
+	    if(!$adm && !$errorpass){
 	    	header("location:../vistas/role.php");
 	    	
 	    }
@@ -94,7 +100,7 @@
 	}
 
 	function getUser($nickname ,$pass){
-		$forgotpass=true;
+		$forgotpass=true;		
 		$pdo = Database::connect();
 	    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	    $sql = "SELECT * FROM M050_USUARIO ORDER BY CO_USUARIO ASC";
@@ -105,26 +111,33 @@
 	    			return $data['CO_USUARIO'];
 	    			//ENVIAR A LA PAGINA DE INICIO
 	    		}
-	    		else{
-	    			if($data['P010_ESTADO_USUARIO']=='SUS'){
-	    				header("location:../vistas/suspended.php");
-	    				echo "Ud no puede acceder su cuenta esta SUSPENDIDA";
-	    			}else if($data['P010_ESTADO_USUARIO']=='BLO'){
-	    				header("location:../vistas/blocked.php");
-	    				
-	    			}else{
-	    				header("location:../vistas/desactived.php");
-	    				
-	    			}
-
-	    		}
+	    		
 
 	    	}
 	    }	  
 	    Database::disconnect();
 	    if($forgotpass){
+	    	$errorpass=true;
 	    	header("location:../vistas/invalidpass.php");
 	    	
+	    }else{
+
+	    	if($data['P010_ESTADO_USUARIO']=='SUS'){
+
+	    		header("location:../vistas/suspended.php");
+	    		echo "Ud no puede acceder su cuenta esta SUSPENDIDA";
+
+	    	}else if($data['P010_ESTADO_USUARIO']=='BLO'){
+
+	    				header("location:../vistas/blocked.php");
+	    				
+			}else{
+	    		header("location:../vistas/desactived.php");
+	    				
+	    	}
+
 	    }
+	    
+
 	}
  ?>

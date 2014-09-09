@@ -168,8 +168,8 @@
               $.ajax({
                 type:'POST',
                 url:'rol/update.php',
-                //data: parametro,
-                data:{ name:$('#name').val(), email:$('#email').val(),selector:$('#selector').val() },
+                data: parametro,
+               // data:{ name:$('#name').val(), email:$('#email').val(),selector:$('#selector').val() },
                 success:function(respuesta){
                   window.location="rol.php";
                 }

@@ -16,6 +16,7 @@
 		if($_SESSION['AT']==true){
 			getModuleModule();
 			getRolModule();
+			getRolUserModule();
 		}
 
 		if($_SESSION['AF']==true){
